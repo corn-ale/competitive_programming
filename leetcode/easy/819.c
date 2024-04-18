@@ -15,7 +15,7 @@ char *substr(char *s, int start, int len)
 	char *result = malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return NULL;
-	for (int i = 0, j = start; i < len - 1 && j < slen; i++, j++)
+	for (int i = 0, j = start; i < len && j < slen; i++, j++)
 		result[i] = s[j];
 	result[len] = '\0';
 	return result;
