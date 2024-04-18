@@ -11,6 +11,7 @@ char *substr(char *s, int start, int len)
 	int slen = strlen(s);
 	if (slen < start + len)
 		len = slen - start;
+	// printf("len: %d\n", len);
 	char *result = malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return NULL;
@@ -22,7 +23,7 @@ char *substr(char *s, int start, int len)
 
 int isPresent(char *str, char **words, int wordCount)
 {
-	int len = strlen(str);
+	// int len = strlen(str);
 	for (int i = 0; i < wordCount; i++)
 		if (strcmp(str, words[i]) == 0)
 			return i;
@@ -107,13 +108,14 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
 		{
 			started = true;
 			start = i;
-	printf("HERE\n");
+	// printf("HERE\n");
 		}
 		else if (started && isWordEnd(paragraph[i]))
 		{
 			started = false;
 			wordlen = i - start;
 			word = substr(paragraph, start, wordlen);
+			printf("word: %s\n", word);
 			if (!word)
 			{
 				free(values);
@@ -123,6 +125,7 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
 			}
 			if (isPresent(word, banned, bannedSize) == -1) // if -1 -> not banned -> include in hashmap
 			{
+	// printf("HERE\n");
 				//check if new word is in hashmap -> increase counter
 				keyLoc = isPresent(word, keys, keyI);
 				if (keyLoc != -1)
@@ -139,7 +142,7 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
 						return NULL;
 					}
 					for (int j = 0; j < wordlen; j++, start++)
-						keys[keyI][j] = start;
+						keys[keyI][j] = paragraph[start];
 					keys[keyI][wordlen] = '\0';
 					values[keyI] = 1;
 					keyI++;
@@ -154,6 +157,7 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
 	int maxLoc = 0;
 	for (int i = 0; i < keyI; i++)
 	{
+		printf("_%s_ %d\n", keys[i], values[i]);
 		if (values[i] > max)
 		{
 			max = values[i];
