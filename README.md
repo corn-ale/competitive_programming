@@ -1,7 +1,8 @@
 # competitive_programming
 
-# failed
+Leetcode solutions.
 
+# failed exercises:
 205
 819
 812
